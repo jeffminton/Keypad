@@ -101,6 +101,7 @@ public:
 
 private:
 	unsigned long startTime;
+	unsigned long debounceStartTime;
 	char *keymap;
     byte *rowPins;
     byte *columnPins;

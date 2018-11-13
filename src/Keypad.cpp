@@ -91,7 +91,15 @@ void Keypad::scanKeys() {
 		pin_mode(columnPins[c],OUTPUT);
 		pin_write(columnPins[c], LOW);	// Begin column pulse output.
 		for (byte r=0; r<sizeKpd.rows; r++) {
-			bitWrite(bitMap[r], c, !pin_read(rowPins[r]));  // keypress is active low so invert to high.
+			if(!pin_read(rowPins[r])){
+				debounceStartTime = millis();
+				while((millis()-debounceStartTime)>debounceTime) {
+					if(pin_read(rowPins[r])){
+						break;
+					}
+				}
+				bitWrite(bitMap[r], c, !pin_read(rowPins[r]));  // keypress is active low so invert to high.
+			}
 		}
 		// Set pin to high impedance input. Effectively ends column pulse.
 		pin_write(columnPins[c],HIGH);

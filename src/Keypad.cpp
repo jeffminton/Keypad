@@ -242,10 +242,9 @@ byte Keypad::numKeys() {
 void Keypad::clearList() {
 	// Delete any IDLE keys
 	for (byte i=0; i<LIST_MAX; i++) {
-		key[i].kstate = IDLE;
-		key[i].kchar = NO_KEY;
-		key[i].kcode = -1;
-		key[i].stateChanged = false;
+		if( key[i].kstate != IDLE ) {
+			key[i].kstate = IDLE;
+		}
 	}
 }
 

@@ -98,6 +98,7 @@ public:
 	char waitForKey();
 	bool keyStateChanged();
 	byte numKeys();
+	void clearList();
 
 private:
 	unsigned long startTime;

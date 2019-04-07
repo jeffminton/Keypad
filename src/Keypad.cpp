@@ -239,6 +239,16 @@ byte Keypad::numKeys() {
 	return sizeof(key)/sizeof(Key);
 }
 
+void Keypad::clearList() {
+	// Delete any IDLE keys
+	for (byte i=0; i<LIST_MAX; i++) {
+		key[i].kstate = IDLE
+		key[i].kchar = NO_KEY;
+		key[i].kcode = -1;
+		key[i].stateChanged = false;
+	}
+}
+
 // Minimum debounceTime is 1 mS. Any lower *will* slow down the loop().
 void Keypad::setDebounceTime(uint debounce) {
 	debounce<1 ? debounceTime=1 : debounceTime=debounce;

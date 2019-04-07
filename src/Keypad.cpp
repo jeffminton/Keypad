@@ -275,8 +275,9 @@ void Keypad::transitionTo(byte idx, KeyState nextState) {
 	}
 	// Sketch used the getKeys() function.
 	// Calls keypadEventListener on any key that changes state.
+	// Only call when the key is pressed
 	else {
-	  	if (keypadEventListener!=NULL)  {
+	  	if (keypadEventListener!=NULL && key[idx].kstate == PRESSED)  {
 			keypadEventListener(key[idx].kchar);
 		}
 	}

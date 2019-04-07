@@ -240,12 +240,15 @@ byte Keypad::numKeys() {
 }
 
 void Keypad::clearList() {
-	// Delete any IDLE keys
-	for (byte i=0; i<LIST_MAX; i++) {
-		if( key[i].kstate != IDLE ) {
-			key[i].kstate = IDLE;
-		}
+	// Clear the bitmap
+	for(int i = 0; i < MAPSIZE; i++) {
+		bitmap[i] = (uint) 0;
 	}
+	// for (byte i=0; i<LIST_MAX; i++) {
+	// 	if( key[i].kstate != IDLE ) {
+	// 		key[i].kstate = IDLE;
+	// 	}
+	// }
 }
 
 // Minimum debounceTime is 1 mS. Any lower *will* slow down the loop().
